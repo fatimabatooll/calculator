@@ -2,22 +2,30 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+    
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <div className='calculator'>
+     <div className='display-number'>
+      <span>(0)</span>0
+      <div className='operators'>
+      <button>/</button>
+      <button>*</button>
+      <button>-</button>
+      <button>+</button>
+
+      <button>Del</button>
+
+      </div>
+      <div className='digits'>
+      <button>0</button>
+      <button>.</button>
+      <button>=</button>
+       
+      </div>
+     </div>
+       
+     </div>
     </div>
   );
 }
