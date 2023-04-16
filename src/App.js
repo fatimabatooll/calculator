@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
 
@@ -9,17 +8,17 @@ function App() {
       const digits  = [];
       for (let i = 1; i < 10; i++){
         digits.push(
-      <button key={i} onClick={() => handleClick(i)}>{i}</button>
+      <button  key={i} onClick={() => handleClick(i)}>{i}</button>
        )
       }
       digits.push(
-        <button key='.' onClick={() => handleClick(0)}>0</button>
+        <button   key='.' onClick={() => handleClick(0)}>0</button>
       )
       digits.push(
-        <button key='.' onClick={() => handleClick('.')}>.</button>
+        <button  key='.' onClick={() => handleClick('.')}>.</button>
       )
       digits.push(
-        <button key='=' onClick={() => handleEquals()}>=</button>
+        <button  key='=' onClick={() => handleEquals()}>=</button>
       )
       return digits;
     }
@@ -53,19 +52,18 @@ function App() {
      <div className='display-number'>
       {number}
       <div className='operators'>
-      <button onClick={() => handleOperator('/')}>/</button>
-      <button onClick={() => handleOperator('*')}>*</button>
-      <button onClick={() => handleOperator('-')}>-</button>
-      <button onClick={() => handleOperator('+')}>+</button>
-      <button onClick={() => handleOperator('%')}>%</button>
-      <button onClick={() => setNumber(number.slice(0, -1))}>Del</button>
+      <button  onClick={() => handleOperator('/')}>/</button>
+      <button  onClick={() => handleOperator('*')}>*</button>
+      <button  onClick={() => handleOperator('-')}>-</button>
+      <button  onClick={() => handleOperator('+')}>+</button>
+      <button  onClick={() => handleOperator('%')}>%</button>
+      <button  onClick={() => setNumber(number.slice(0, -1))}>Del</button>
 
       </div>
       <div className='digits'>
       {createDigits()}
       </div>
      </div>
-       
      </div>
     </div>
   );
