@@ -16,10 +16,10 @@ function App() {
         <button key='.' onClick={() => handleClick(0)}>0</button>
       )
       digits.push(
-        <button key='.' onClick={() => handleClick()}>.</button>
+        <button key='.' onClick={() => handleClick('.')}>.</button>
       )
       digits.push(
-        <button key='=' onClick={() => handleClick()}>=</button>
+        <button key='=' onClick={() => handleEquals()}>=</button>
       )
       return digits;
     }
@@ -37,19 +37,28 @@ function App() {
           setNumber(number + operator)
         }
     }
+    const handleEquals = () =>{
+      if(number === '') return;
+      let result = '';
+      try {
+        result = eval(number);
+      }catch (error){
+        result = 'error'
+      }
+      setNumber(result.toString())
+    }
   return (
     <div className="App">
      <div className='calculator'>
      <div className='display-number'>
       {number}
       <div className='operators'>
-      <button onClick={() => handleClick('/')}>/</button>
-      <button onClick={() => handleClick('*')}>*</button>
-      <button onClick={() => handleClick('-')}>-</button>
-      <button onClick={() => handleClick('+')}>+</button>
-      <button onClick={() => handleClick('%')}>%</button>
-
-      <button>Del</button>
+      <button onClick={() => handleOperator('/')}>/</button>
+      <button onClick={() => handleOperator('*')}>*</button>
+      <button onClick={() => handleOperator('-')}>-</button>
+      <button onClick={() => handleOperator('+')}>+</button>
+      <button onClick={() => handleOperator('%')}>%</button>
+      <button onClick={() => setNumber(number.slice(0, -1))}>Del</button>
 
       </div>
       <div className='digits'>
