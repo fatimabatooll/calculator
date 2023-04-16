@@ -2,7 +2,29 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-    
+  // createDigits generates digits for calculator
+    const createDigits = () => {
+      const digits  = [];
+      for (let i = 1; i < 10; i++){
+        digits.push(
+      <button key={i} onClick={() => handleClick(i)}>{i}</button>
+       )
+      }
+      digits.push(
+        <button key='.' onClick={() => handleClick(0)}>0</button>
+      )
+      digits.push(
+        <button key=',' onClick={() => handleClick()}>,</button>
+      )
+      digits.push(
+        <button key='=' onClick={() => handleClick()}>=</button>
+      )
+      return digits;
+    }
+    //updates the expression
+    const handleClick = (value) => {
+
+    }
   return (
     <div className="App">
      <div className='calculator'>
@@ -13,15 +35,13 @@ function App() {
       <button>*</button>
       <button>-</button>
       <button>+</button>
+      <button>%</button>
 
       <button>Del</button>
 
       </div>
       <div className='digits'>
-      <button>0</button>
-      <button>.</button>
-      <button>=</button>
-       
+      {createDigits()}
       </div>
      </div>
        
