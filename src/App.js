@@ -16,7 +16,7 @@ function App() {
         <button key='.' onClick={() => handleClick(0)}>0</button>
       )
       digits.push(
-        <button key=',' onClick={() => handleClick()}>,</button>
+        <button key='.' onClick={() => handleClick()}>.</button>
       )
       digits.push(
         <button key='=' onClick={() => handleClick()}>=</button>
@@ -26,18 +26,28 @@ function App() {
     //updates the expression
     const handleClick = (value) => {
          setNumber(number + value);
+    };
+    // handle operator
+    const handleOperator = (operator) => {
+      if(number ==='')  return
+        const lastNum = number.slice(-1);
+        if(lastNum === '+' || lastNum === '-' || lastNum === '/' || lastNum === '*' || lastNum === '%'){
+          setNumber(number.slice(0. -1) + operator);
+        } else {
+          setNumber(number + operator)
+        }
     }
   return (
     <div className="App">
      <div className='calculator'>
      <div className='display-number'>
-      <span>(0)</span>0
+      {number}
       <div className='operators'>
-      <button>/</button>
-      <button>*</button>
-      <button>-</button>
-      <button>+</button>
-      <button>%</button>
+      <button onClick={() => handleClick('/')}>/</button>
+      <button onClick={() => handleClick('*')}>*</button>
+      <button onClick={() => handleClick('-')}>-</button>
+      <button onClick={() => handleClick('+')}>+</button>
+      <button onClick={() => handleClick('%')}>%</button>
 
       <button>Del</button>
 
