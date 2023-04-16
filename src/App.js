@@ -1,7 +1,9 @@
 import logo from './logo.svg';
 import './App.css';
+import { useState } from 'react';
 
 function App() {
+  const [number, setNumber] = useState('')
   // createDigits generates digits for calculator
     const createDigits = () => {
       const digits  = [];
@@ -23,7 +25,7 @@ function App() {
     }
     //updates the expression
     const handleClick = (value) => {
-
+         setNumber(number + value);
     }
   return (
     <div className="App">
