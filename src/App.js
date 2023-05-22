@@ -1,72 +1,66 @@
-import './App.css';
-import { useState } from 'react';
+import React, { useState } from 'react';
+import Display from './Components /Display';
+import Keypad from './Components /Keypad';
 
-function App() {
-  const [number, setNumber] = useState('')
-  // createDigits generates digits for calculator
-    const createDigits = () => {
-      const digits  = [];
-      for (let i = 1; i < 10; i++){
-        digits.push(
-      <button  key={i} onClick={() => handleClick(i)}>{i}</button>
-       )
-      }
-      digits.push(
-        <button   key='.' onClick={() => handleClick(0)}>0</button>
-      )
-      digits.push(
-        <button  key='.' onClick={() => handleClick('.')}>.</button>
-      )
-      digits.push(
-        <button  key='=' onClick={() => handleEquals()}>=</button>
-      )
-      return digits;
+function  App() {
+  const [result, setResult] = useState(0);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleNumberClick = (number) => {
+    setInputValue(inputValue + number);
+  };
+
+  const handleOperatorClick = (operator) => {
+    const operators = ['+', '-', '*', '/'];
+
+    if (operators.includes(inputValue.slice(-1))) {
+      setInputValue(inputValue.slice(0, -1) + operator);
+    } else {
+      setInputValue(inputValue + operator);
     }
-    //updates the expression
-    const handleClick = (value) => {
-         setNumber(number + value);
-    };
-    // handle operator
-    const handleOperator = (operator) => {
-      if(number ==='')  return
-        const lastNum = number.slice(-1);
-        if(lastNum === '+' || lastNum === '-' || lastNum === '/' || lastNum === '*' || lastNum === '%'){
-          setNumber(number.slice(0. -1) + operator);
-        } else {
-          setNumber(number + operator)
-        }
+  };
+
+  const handleDecimalClick = () => {
+    if (!inputValue.includes('.')) {
+      setInputValue(inputValue + '.');
     }
-    const handleEquals = () =>{
-      if(number === '') return;
-      let result = '';
-      try {
-        result = eval(number);
-      }catch (error){
-        result = 'error'
-      }
-      setNumber(result.toString())
+  };
+
+  const handleClearClick = () => {
+    setInputValue('');
+    setResult(0);
+  };
+
+  const handleEqualsClick = () => {
+    try {
+      setResult(eval(inputValue));
+      setInputValue(eval(inputValue).toString());
+    } catch (error) {
+      setResult(0);
+      setInputValue('');
     }
+  };
+
+  const handleSqrtClick = () => {
+    if (inputValue) {
+      setResult(Math.sqrt(parseFloat(inputValue)));
+      setInputValue(Math.sqrt(parseFloat(inputValue)).toString());
+    }
+  };
+
   return (
-    <div className="App">
-     <div className='calculator'>
-     <div className='display-number'>
-      {number}
-      <div className='operators'>
-      <button  onClick={() => handleOperator('/')}>/</button>
-      <button  onClick={() => handleOperator('*')}>*</button>
-      <button  onClick={() => handleOperator('-')}>-</button>
-      <button  onClick={() => handleOperator('+')}>+</button>
-      <button  onClick={() => handleOperator('%')}>%</button>
-      <button  onClick={() => setNumber(number.slice(0, -1))}>Del</button>
+    <div className="calculator">
+      <Display inputValue={inputValue} result={result} />
+      <Keypad
+        handleNumberClick={handleNumberClick}
+        handleOperatorClick={handleOperatorClick}
+        handleDecimalClick={handleDecimalClick}
+        handleClearClick={handleClearClick}
+        handleEqualsClick={handleEqualsClick}
+        handleSqrtClick={handleSqrtClick}
+        />
 
-      </div>
-      <div className='digits'>
-      {createDigits()}
-      </div>
      </div>
-     </div>
-    </div>
   );
 }
-
-export default App;
+  export default App;
